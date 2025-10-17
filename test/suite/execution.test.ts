@@ -10,7 +10,7 @@ suite('Execution Test Suite', () => {
 
   test('ResultFormatter should format empty results', () => {
     const result = formatter.formatResults({ recordset: [] }, 1000);
-    assert.ok(result.includes('No rows'));
+    assert.ok(result.includes('No rows returned'), `Result should include 'No rows returned' but got: ${result}`);
   });
 
   test('ResultFormatter should format recordset', () => {

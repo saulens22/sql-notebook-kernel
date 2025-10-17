@@ -5,13 +5,14 @@ suite('Extension Test Suite', () => {
   vscode.window.showInformationMessage('Start all tests.');
 
   test('Extension should be present', () => {
-    assert.ok(vscode.extensions.getExtension('saulens22.sql-notebook-kernel'));
+    const ext = vscode.extensions.getExtension('saulens22.sql-notebook-kernel');
+    assert.ok(ext, 'Extension saulens22.sql-notebook-kernel should be present');
   });
 
   test('Extension should activate', async () => {
     const ext = vscode.extensions.getExtension('saulens22.sql-notebook-kernel');
-    assert.ok(ext);
+    assert.ok(ext, 'Extension should exist before activation');
     await ext!.activate();
-    assert.strictEqual(ext!.isActive, true);
+    assert.strictEqual(ext!.isActive, true, 'Extension should be active after activation');
   });
 });
