@@ -86,6 +86,8 @@ Server=myserver;Database=mydb;Integrated Security=true;TrustServerCertificate=tr
 
 ### Example Queries
 
+See the [examples/sample-queries.ipynb](examples/sample-queries.ipynb) notebook for a complete example.
+
 **Simple SELECT:**
 ```sql
 SELECT * FROM Users WHERE Active = 1;

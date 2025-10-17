@@ -11,6 +11,7 @@ webpack.config.js
 **/*.ts
 node_modules
 .github/**
+examples/**
 *.md
 !README.md
 !CHANGELOG.md
