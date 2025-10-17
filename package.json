@@ -1,0 +1,88 @@
+{
+  "name": "sql-notebook-kernel",
+  "displayName": "SQL Notebook Kernel",
+  "description": "A Jupyter kernel for SQL Server notebooks in Visual Studio Code",
+  "version": "0.1.0",
+  "publisher": "saulens22",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Notebooks",
+    "Data Science"
+  ],
+  "keywords": [
+    "sql",
+    "sql-server",
+    "notebook",
+    "jupyter",
+    "database"
+  ],
+  "activationEvents": [
+    "onNotebook:jupyter-notebook"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "SQL Notebook",
+      "properties": {
+        "sqlNotebook.defaultConnectionString": {
+          "type": "string",
+          "default": "",
+          "description": "Default SQL Server connection string"
+        },
+        "sqlNotebook.queryTimeout": {
+          "type": "number",
+          "default": 30000,
+          "description": "Query timeout in milliseconds"
+        },
+        "sqlNotebook.maxRows": {
+          "type": "number",
+          "default": 1000,
+          "description": "Maximum number of rows to display"
+        },
+        "sqlNotebook.enableIntelliSense": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable IntelliSense for SQL queries"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.6",
+    "@types/mssql": "^9.1.5",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "mssql": "^10.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saulens22/sql-notebook-kernel.git"
+  },
+  "license": "MIT"
+}
