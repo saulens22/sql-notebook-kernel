@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 
 export class Logger {
-  private outputChannel: vscode.OutputChannel;
+  private outputChannel: vscode.OutputChannel | undefined;
+  private isDisposed = false;
 
   constructor() {
     this.outputChannel = vscode.window.createOutputChannel('SQL Notebook');
@@ -14,7 +15,7 @@ export class Logger {
   error(message: string, error?: Error): void {
     const errorMessage = error ? `${message}: ${error.message}` : message;
     this.log('ERROR', errorMessage);
-    if (error?.stack) {
+    if (error?.stack && this.outputChannel) {
       this.outputChannel.appendLine(error.stack);
     }
   }
@@ -28,15 +29,31 @@ export class Logger {
   }
 
   private log(level: string, message: string): void {
+    if (this.isDisposed || !this.outputChannel) {
+      return;
+    }
     const timestamp = new Date().toISOString();
     this.outputChannel.appendLine(`[${timestamp}] [${level}] ${message}`);
   }
 
   show(): void {
-    this.outputChannel.show();
+    if (!this.isDisposed && this.outputChannel) {
+      this.outputChannel.show();
+    }
   }
 
   dispose(): void {
-    this.outputChannel.dispose();
+    if (this.isDisposed) {
+      return;
+    }
+    this.isDisposed = true;
+    if (this.outputChannel) {
+      try {
+        this.outputChannel.dispose();
+      } catch (error) {
+        // Ignore disposal errors in tests
+      }
+      this.outputChannel = undefined;
+    }
   }
 }
