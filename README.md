@@ -122,9 +122,24 @@ npm run compile
 
 ### Testing
 
+Run unit tests:
 ```bash
 npm test
 ```
+
+Run integration tests with SQL Server:
+```bash
+# Start SQL Server (e.g., using Docker)
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourStrong@Passw0rd" \
+  -p 1433:1433 --name mssql \
+  -d mcr.microsoft.com/mssql/server:2022-latest
+
+# Set connection string and run tests
+export SQL_CONNECTION_STRING="Server=localhost;Database=master;User Id=sa;Password=YourStrong@Passw0rd;Encrypt=true;TrustServerCertificate=true"
+npm test
+```
+
+The CI/CD pipeline automatically runs integration tests against a SQL Server container on every push.
 
 ### Linting
 

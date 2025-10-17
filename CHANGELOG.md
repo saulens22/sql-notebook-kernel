@@ -24,8 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error handling with detailed stack traces
 - Markdown table formatting for query results
 - Logging output channel for debugging
-- Comprehensive test suite
-- GitHub Actions CI/CD pipeline
+- Comprehensive test suite with integration tests
+- GitHub Actions CI/CD pipeline with SQL Server container testing
 - Extension packaging and release automation
 - Documentation and usage examples
 
@@ -36,6 +36,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mocha test framework
 - VS Code Test Runner integration
 - Multi-platform support (Windows, macOS, Linux)
+- Integration tests against SQL Server 2022 container
+
+### Fixed
+- Fixed GitHub Actions test execution with proper xvfb setup
+- Added SQL Server container for integration testing in CI/CD
 
 ## [Unreleased]
 
